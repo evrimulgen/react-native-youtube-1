@@ -145,4 +145,14 @@ public class YouTubeView extends FrameLayout {
     public void setShowFullscreenButton(boolean bool) {
         mYoutubeController.setShowFullscreenButton(bool);
     }
+
+    @Override
+    public void onBackPressed() {
+        if (mYoutubeController.isPlayerFullscreen()) {
+            mYoutubeController.setFullscreen(false);
+        } else {
+            //super.onBackPressed();
+            getReactContext().getCurrentActivity().getFragmentManager().popBackStack();
+        }
+    }
 }
