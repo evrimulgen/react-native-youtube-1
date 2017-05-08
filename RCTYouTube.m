@@ -13,7 +13,6 @@
 @property (nonatomic, copy) RCTDirectEventBlock onReady;
 @property (nonatomic, copy) RCTDirectEventBlock onChangeState;
 @property (nonatomic, copy) RCTDirectEventBlock onChangeQuality;
-@property (nonatomic, copy) RCTDirectEventBlock onChangeFullscreen;
 @property (nonatomic, copy) RCTDirectEventBlock onProgress;
 
 @end
@@ -24,10 +23,6 @@
     BOOL _isReady;
     BOOL _playOnLoad;
     BOOL _loop;
-
-    /* StatusBar visibility status before the player changed to fullscreen */
-    // BOOL _isStatusBarHidden;
-    BOOL _isFullscreen;
 }
 
 - (instancetype)initWithBridge:(RCTBridge *)bridge {
@@ -37,9 +32,6 @@
       _isReady = NO;
       _playOnLoad = NO;
       _loop = NO;
-      _isFullscreen = NO;
-
-      [self addFullscreenObserver];
 
       self.delegate = self;
     }
@@ -50,21 +42,6 @@
 
 - (instancetype)initWithCoder:(NSCoder *)aDecoder { @throw nil; }
 
-- (void)addFullscreenObserver {
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(playerFullscreenStateChange:)
-                                                 name:UIWindowDidResignKeyNotification
-                                               object:self.window];
-}
-
-- (void)removeFullScreenObserver {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIWindowDidResignKeyNotification object:self.window];
-}
-
-- (void)dealloc {
-    [self removeFullScreenObserver];
-}
-
 - (void)layoutSubviews {
     [super layoutSubviews];
 
@@ -73,25 +50,6 @@
     }
 }
 
-- (void)playerFullscreenStateChange:(NSNotification*)notification
-{
-    if ((UIWindow*)notification.object == self.window && !_isFullscreen) {
-        _isFullscreen = YES;
-
-        _onChangeFullscreen(@{
-            @"isFullscreen": @(_isFullscreen),
-            @"target": self.reactTag
-        });
-    }
-    if ((UIWindow*)notification.object != self.window && _isFullscreen) {
-        _isFullscreen = NO;
-
-        _onChangeFullscreen(@{
-            @"isFullscreen": @(_isFullscreen),
-            @"target": self.reactTag
-        });
-    }
-}
 
 #pragma mark - YTPlayer control methods
 

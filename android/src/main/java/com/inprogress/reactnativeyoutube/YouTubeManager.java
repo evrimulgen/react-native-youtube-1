@@ -82,9 +82,7 @@ public class YouTubeManager extends SimpleViewManager<YouTubeView> {
             "state",
             (Object) MapBuilder.of("registrationName", "onYouTubeChangeState"),
             "quality",
-            (Object) MapBuilder.of("registrationName", "onYouTubeChangeQuality"),
-            "fullscreen",
-            (Object) MapBuilder.of("registrationName", "onYouTubeChangeFullscreen")
+            (Object) MapBuilder.of("registrationName", "onYouTubeChangeQuality")
         );
     }
 
@@ -122,9 +120,9 @@ public class YouTubeManager extends SimpleViewManager<YouTubeView> {
         view.setLoop(param);
     }
 
-    @ReactProp(name = "fullscreen")
-    public void setPropFullscreen(YouTubeView view, @Nullable boolean param) {
-        view.setFullscreen(param);
+    @ReactProp(name = "playsInline")
+    public void setPropPlaysInline(YouTubeView view, @Nullable boolean param) {
+        view.setPlaysInline(param);
     }
 
     @ReactProp(name = "controls")

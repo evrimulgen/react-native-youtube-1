@@ -98,14 +98,6 @@ public class YouTubeView extends FrameLayout {
         reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(getId(), "quality", event);
     }
 
-    public void didChangeToFullscreen(boolean isFullscreen) {
-        WritableMap event = Arguments.createMap();
-        ReactContext reactContext = (ReactContext) getContext();
-        event.putBoolean("isFullscreen", isFullscreen);
-        event.putInt("target", getId());
-        reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(getId(), "fullscreen", event);
-    }
-
     public void setApiKey(String apiKey) {
         try {
             mYouTubePlayerFragment.initialize(apiKey, mYoutubeController);
@@ -134,8 +126,8 @@ public class YouTubeView extends FrameLayout {
         mYoutubeController.setLoop(bool);
     }
 
-    public void setFullscreen(boolean bool) {
-        mYoutubeController.setFullscreen(bool);
+    public void setPlaysInline(boolean bool) {
+        mYoutubeController.setPlaysInline(bool);
     }
 
     public void setControls(int nb) {
@@ -144,15 +136,5 @@ public class YouTubeView extends FrameLayout {
 
     public void setShowFullscreenButton(boolean bool) {
         mYoutubeController.setShowFullscreenButton(bool);
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (mYoutubeController.isPlayerFullscreen()) {
-            mYoutubeController.setFullscreen(false);
-        } else {
-            //super.onBackPressed();
-            getReactContext().getCurrentActivity().getFragmentManager().popBackStack();
-        }
     }
 }
