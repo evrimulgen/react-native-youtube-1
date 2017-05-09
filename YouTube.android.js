@@ -104,6 +104,14 @@ export default class YouTube extends React.Component {
     );
   }
 
+  exitFullScreen() {
+      UIManager.dispatchViewManagerCommand(
+          ReactNative.findNodeHandle(this._nativeComponentRef),
+          UIManager.ReactYouTube.Commands.exitFullScreen,
+          [],
+      );
+  }
+
   videosIndex() {
     return new Promise((resolve, reject) =>
       NativeModules.YouTubeModule

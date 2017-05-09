@@ -63,6 +63,11 @@ public class YouTubeView extends FrameLayout {
         mYoutubeController.playVideoAt(index);
     }
 
+    public void exitFullScreen() {
+        mYoutubeController.exitFullScreen();
+    }
+
+
     public int getVideosIndex() {
         return mYoutubeController.getVideosIndex();
     }

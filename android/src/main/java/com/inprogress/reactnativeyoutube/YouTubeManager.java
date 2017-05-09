@@ -19,6 +19,7 @@ public class YouTubeManager extends SimpleViewManager<YouTubeView> {
     private static final int COMMAND_NEXT_VIDEO = 2;
     private static final int COMMAND_PREVIOUS_VIDEO = 3;
     private static final int COMMAND_PLAY_VIDEO_AT = 4;
+    private static final int COMMAND_EXIT_FULL_SCREEN = 5;
 
     @Override
     public String getName() {
@@ -40,7 +41,9 @@ public class YouTubeManager extends SimpleViewManager<YouTubeView> {
             "previousVideo",
             COMMAND_PREVIOUS_VIDEO,
             "playVideoAt",
-            COMMAND_PLAY_VIDEO_AT
+            COMMAND_PLAY_VIDEO_AT,
+            "exitFullScreen",
+            COMMAND_EXIT_FULL_SCREEN,
         );
     }
 
@@ -63,6 +66,10 @@ public class YouTubeManager extends SimpleViewManager<YouTubeView> {
             }
             case COMMAND_PLAY_VIDEO_AT: {
                 view.playVideoAt(args.getInt(0));
+                return;
+            }
+            case COMMAND_EXIT_FULL_SCREEN: {
+                view.exitFullScreen();
                 return;
             }
             default:

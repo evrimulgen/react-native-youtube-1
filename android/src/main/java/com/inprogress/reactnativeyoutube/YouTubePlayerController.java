@@ -169,6 +169,15 @@ public class YouTubePlayerController implements
         }
     }
 
+    public void exitFullScreen() {
+        /*if (isLoaded() && isVideosMode()) {
+            boolean indexIsInRange = setVideosIndex(index);
+            if (indexIsInRange) loadVideos();
+            else mYouTubeView.receivedError("Video index is out of bound for videoIds[]");
+        }*/
+        if (isLoaded()) mYouTubePlayer.setFullscreen(false);
+    }
+
     /**
      * Private methods
      **/
