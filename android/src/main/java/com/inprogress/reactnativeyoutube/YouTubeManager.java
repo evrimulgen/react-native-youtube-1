@@ -43,7 +43,7 @@ public class YouTubeManager extends SimpleViewManager<YouTubeView> {
             "playVideoAt",
             COMMAND_PLAY_VIDEO_AT,
             "exitFullScreen",
-            COMMAND_EXIT_FULL_SCREEN,
+            COMMAND_EXIT_FULL_SCREEN
         );
     }
 
